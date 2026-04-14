@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Adopt Me Planner</title>
+  <title>Adopt Me Task Tracker</title>
+  <style>
+    body { font-family: Arial; text-align:center; padding:20px; }
+    button { margin:5px; padding:10px; font-size:16px; }
+  </style>
 </head>
-<body style="font-family: Arial; text-align:center;">
 
-<h1>🐾 Adopt Me Planner</h1>
+<body>
 
-<p>Tasks Needed:</p>
-<input id="needed" type="number">
+<h1>🐾 Adopt Me Task Tracker</h1>
 
-<p>Tasks Done:</p>
-<input id="done" type="number">
+<h2 id="progress">Progress: 0%</h2>
 
-<h2 id="result">Progress: 0%</h2>
+<button onclick="addProgress(8)">🛁 Bath</button>
+<button onclick="addProgress(10)">🍎 Hunger</button>
+<button onclick="addProgress(12)">💤 Sleep</button>
+<button onclick="addProgress(6)">🎾 Play</button>
+<button onclick="addProgress(10)">🚶 Walk</button>
+
+<br><br>
+
+<button onclick="reset()">🔄 Reset</button>
 
 <script>
-function update() {
-  let needed = document.getElementById("needed").value;
-  let done = document.getElementById("done").value;
+let progress = 0;
 
-  let percent = (done / needed) * 100;
+function addProgress(value) {
+  progress += value;
+  if (progress > 100) progress = 100;
 
-  if (!percent) percent = 0;
-
-  document.getElementById("result").innerHTML =
-    "Progress: " + percent.toFixed(1) + "%";
+  document.getElementById("progress").innerText =
+    "Progress: " + progress.toFixed(1) + "%";
 }
 
-document.getElementById("needed").addEventListener("input", update);
-document.getElementById("done").addEventListener("input", update);
+function reset() {
+  progress = 0;
+  document.getElementById("progress").innerText =
+    "Progress: 0%";
+}
 </script>
 
 </body>
