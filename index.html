@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Adopt Me Planner</title>
+</head>
+<body style="font-family: Arial; text-align:center;">
+
+<h1>🐾 Adopt Me Planner</h1>
+
+<p>Tasks Needed:</p>
+<input id="needed" type="number">
+
+<p>Tasks Done:</p>
+<input id="done" type="number">
+
+<h2 id="result">Progress: 0%</h2>
+
+<script>
+function update() {
+  let needed = document.getElementById("needed").value;
+  let done = document.getElementById("done").value;
+
+  let percent = (done / needed) * 100;
+
+  if (!percent) percent = 0;
+
+  document.getElementById("result").innerHTML =
+    "Progress: " + percent.toFixed(1) + "%";
+}
+
+document.getElementById("needed").addEventListener("input", update);
+document.getElementById("done").addEventListener("input", update);
+</script>
+
+</body>
+</html>
