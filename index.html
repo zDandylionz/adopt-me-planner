@@ -5,6 +5,7 @@
   <style>
     body { font-family: Arial; text-align:center; padding:20px; }
     button { margin:5px; padding:10px; font-size:16px; }
+    .box { margin-top:20px; font-size:20px; }
   </style>
 </head>
 
@@ -12,34 +13,48 @@
 
 <h1>🐾 Adopt Me Task Tracker</h1>
 
-<h2 id="progress">Progress: 0%</h2>
+<h2 id="progress">Progress: 0 / 25 tasks</h2>
+<h3 id="percent">0%</h3>
 
-<button onclick="addProgress(8)">🛁 Bath</button>
-<button onclick="addProgress(10)">🍎 Hunger</button>
-<button onclick="addProgress(12)">💤 Sleep</button>
-<button onclick="addProgress(6)">🎾 Play</button>
-<button onclick="addProgress(10)">🚶 Walk</button>
+<div class="box">
+  <button onclick="addTask()">🛁 Bath</button>
+  <button onclick="addTask()">🍎 Hunger</button>
+  <button onclick="addTask()">💤 Sleep</button>
+  <button onclick="addTask()">🎾 Play</button>
+  <button onclick="addTask()">🚶 Walk</button>
+</div>
 
-<br><br>
+<br>
 
 <button onclick="reset()">🔄 Reset</button>
 
 <script>
-let progress = 0;
+let done = 0;
+let total = 25; // default pet growth estimate
 
-function addProgress(value) {
-  progress += value;
-  if (progress > 100) progress = 100;
+function update() {
+  let percent = (done / total) * 100;
 
   document.getElementById("progress").innerText =
-    "Progress: " + progress.toFixed(1) + "%";
+    `Progress: ${done} / ${total} tasks`;
+
+  document.getElementById("percent").innerText =
+    percent.toFixed(1) + "%";
+}
+
+function addTask() {
+  if (done < total) {
+    done++;
+    update();
+  }
 }
 
 function reset() {
-  progress = 0;
-  document.getElementById("progress").innerText =
-    "Progress: 0%";
+  done = 0;
+  update();
 }
+
+update();
 </script>
 
 </body>
