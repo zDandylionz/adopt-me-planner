@@ -1,60 +1,91 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Adopt Me Task Tracker</title>
+  <title>Adopt Me Pro Tracker</title>
   <style>
-    body { font-family: Arial; text-align:center; padding:20px; }
-    button { margin:5px; padding:10px; font-size:16px; }
-    .box { margin-top:20px; font-size:20px; }
+    body { font-family: Arial; text-align:center; padding:20px; background:#f7f7f7; }
+    button { margin:6px; padding:10px 14px; font-size:15px; cursor:pointer; }
+    .card { background:white; padding:20px; border-radius:12px; max-width:600px; margin:auto; }
+    .bar {
+      width:100%;
+      background:#ddd;
+      height:25px;
+      border-radius:10px;
+      margin-top:15px;
+    }
+    .fill {
+      height:25px;
+      width:0%;
+      background:#4caf50;
+      border-radius:10px;
+      transition:0.3s;
+    }
   </style>
 </head>
 
 <body>
 
-<h1>🐾 Adopt Me Task Tracker</h1>
+<div class="card">
 
-<h2 id="progress">Progress: 0 / 25 tasks</h2>
-<h3 id="percent">0%</h3>
+<h1>🐾 Adopt Me PRO Tracker</h1>
 
-<div class="box">
-  <button onclick="addTask()">🛁 Bath</button>
-  <button onclick="addTask()">🍎 Hunger</button>
-  <button onclick="addTask()">💤 Sleep</button>
-  <button onclick="addTask()">🎾 Play</button>
-  <button onclick="addTask()">🚶 Walk</button>
+<h2 id="text">Progress: 0 / 100 XP</h2>
+
+<div class="bar">
+  <div class="fill" id="bar"></div>
 </div>
 
 <br>
 
+<h3>🟢 Common Tasks (+5 XP)</h3>
+<button onclick="add(5)">🍎 Hunger</button>
+<button onclick="add(5)">💤 Sleep</button>
+<button onclick="add(5)">🛁 Bath</button>
+<button onclick="add(5)">🚽 Toilet</button>
+<button onclick="add(5)">🎾 Play</button>
+<button onclick="add(5)">🚶 Walk</button>
+
+<h3>🟡 Rare Tasks (+15 XP)</h3>
+<button onclick="add(15)">🏥 Hospital</button>
+<button onclick="add(15)">🏫 School</button>
+<button onclick="add(15)">🍕 Pizza Party</button>
+<button onclick="add(15)">🏖️ Beach Trip</button>
+<button onclick="add(15)">⛺ Camping</button>
+
+<br><br>
+
 <button onclick="reset()">🔄 Reset</button>
 
+</div>
+
 <script>
-let done = 0;
-let total = 25; // default pet growth estimate
+
+let xp = 0;
+let maxXP = 100;
 
 function update() {
-  let percent = (done / total) * 100;
+  if (xp > maxXP) xp = maxXP;
 
-  document.getElementById("progress").innerText =
-    `Progress: ${done} / ${total} tasks`;
+  let percent = (xp / maxXP) * 100;
 
-  document.getElementById("percent").innerText =
-    percent.toFixed(1) + "%";
+  document.getElementById("text").innerText =
+    `Progress: ${xp} / ${maxXP} XP`;
+
+  document.getElementById("bar").style.width = percent + "%";
 }
 
-function addTask() {
-  if (done < total) {
-    done++;
-    update();
-  }
+function add(value) {
+  xp += value;
+  update();
 }
 
 function reset() {
-  done = 0;
+  xp = 0;
   update();
 }
 
 update();
+
 </script>
 
 </body>
